@@ -4,7 +4,7 @@ const Pool = MySQL.createPool({
   host: "localhost",
   user: "root",
   password: "Aritraroy18@",
-//   database: "e_commerce_mini",
+  database: "sys", //schema name is added
   //   waitForConnections: true,
   //   charset: "utf8mb4",
 });

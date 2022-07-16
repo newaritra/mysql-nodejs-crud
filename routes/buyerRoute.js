@@ -10,12 +10,38 @@ router.use(bodyParser.urlencoded());
 
 //api routes
 
-router.get("/get-sellers", async (req, res) => {
+router.post("create-order/:seller_id", async (req, res) => {
+  try {
+    const seller_id = req.params.seller_id;
+    const result = await runQuery(
+      `SELECT id,product_name,price FROM Products WHERE seller_id='${seller_id}' AND ordered=0`
+    );
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/list-of-sellers", async (req, res) => {
   //gets list of sellers
   try {
-    const result = await runQuery(`SELECT * FROM Users`);
+    const result = await runQuery(
+      `SELECT id,username FROM Users WHERE usertype='seller'`
+    );
     res.json(result);
     console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//api for getting the catalog for a specific seller
+router.get("/seller-catalog/:seller_id", async (req, res) => {
+  try {
+    const seller_id = req.params.seller_id;
+    const result = await runQuery(
+      `SELECT * FROM Products WHERE seller_id = ${seller_id}`
+    );
+    res.json(result);
   } catch (err) {
     console.log(err);
   }

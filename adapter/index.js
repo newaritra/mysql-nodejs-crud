@@ -1,2 +1,1 @@
-const MySQL = require("./mySql");
-exports.runQuery = MySQL;
+exports.runQuery = require("./mySql");
